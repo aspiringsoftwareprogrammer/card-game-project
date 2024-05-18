@@ -1,6 +1,7 @@
 const { describe, it, expect, beforeAll, afterAll } = require('@jest/globals')
 const { User } = require('.')
 const db = require('../db/config')
+const sequelize = require('../db/config')
 
 // define in global scope
 let user
@@ -19,8 +20,15 @@ describe('User', () => {
     expect(user).toHaveProperty('id')
   })
 
-  /**
-   * Create more tests
-   * E.g. check that the username of the created user is actually gandalf
-   */
+
+  it('can connect to databse', async()=>{
+  try{
+    await db.authenticate();
+    console.log("connection success")
+  }catch(error){
+    console.log("connection unsuccessful", error)
+  }
+
+  })
+
 })
